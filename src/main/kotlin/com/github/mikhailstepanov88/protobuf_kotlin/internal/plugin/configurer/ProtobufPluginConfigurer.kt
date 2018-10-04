@@ -61,6 +61,6 @@ class ProtobufPluginConfigurer : PluginConfigurer<ProtobufConvention>() {
      * @return Groovy closure with lazy configure operation.
      */
     private fun <TypeOfObject> lazyConfigureObject(configure: (TypeOfObject) -> Unit) = object : Closure<Unit>(this, this) {
-        override fun call() = configure(uncheckedCast<TypeOfObject>(delegate))
+        override fun call() = uncheckedCast<TypeOfObject>(delegate)?.let(configure)
     }
 }
